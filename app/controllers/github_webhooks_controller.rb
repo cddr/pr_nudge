@@ -11,9 +11,9 @@ class GithubWebhooksController < ApplicationController
     json = JSON.parse(params[:github_webhook].to_json)
     puts "=" * 50
     puts json
-    File.open("#{Rails.root}/test/fixtures/pr_open.json", 'w') do |f|
-      f.write json
-    end
+    #File.open("#{Rails.root}/test/fixtures/delete.json", 'w') do |f|
+      #f.write json
+    #end
     puts "=" * 50
     puts "EVENT WAS: #{event}"
     render json: json
