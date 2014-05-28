@@ -11,6 +11,12 @@ class GithubWebhooksController < ApplicationController
     json = JSON.parse(params[:github_webhook].to_json)
     puts "=" * 50
     puts json
+    # to differentiate:
+    # branch deletion
+    # branch merge into master/develop
+    # pr_comment
+    # pr_open
+    # pr_review_comment
     #File.open("#{Rails.root}/test/fixtures/delete.json", 'w') do |f|
       #f.write json
     #end
