@@ -18,7 +18,7 @@ class GithubWebhooksController < ApplicationController
     # pr_open
     # pr_review_comment
     #File.open("#{Rails.root}/test/fixtures/delete.json", 'w') do |f|
-      #f.write json
+      #f.write params[:github_webhook].to_json
     #end
     puts "=" * 50
     puts "EVENT WAS: #{event}"
