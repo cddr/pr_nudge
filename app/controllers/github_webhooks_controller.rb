@@ -7,6 +7,8 @@ class GithubWebhooksController < ApplicationController
   end
 
   def payload
+    # TODO create an object w/type (event header)
+    # use psql json to store the payload
     event = request.headers['X-GitHub-Event']
     json = JSON.parse(params[:github_webhook].to_json)
     puts "=" * 50
