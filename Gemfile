@@ -31,3 +31,4 @@ gem 'spring',      group: :development
 
 # for heroku deployment
 gem 'rails_12factor', group: :production
+gem 'unicorn'
