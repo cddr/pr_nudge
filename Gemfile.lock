@@ -29,6 +29,11 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
+    byebug (2.1.1)
+      columnize (~> 0.3.6)
+      debugger-linecache (~> 1.2.0)
+    columnize (0.3.6)
+    debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.1.0)
     hike (1.2.3)
@@ -112,6 +117,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   jbuilder (~> 2.0)
   pg
   rails (= 4.1.1)
