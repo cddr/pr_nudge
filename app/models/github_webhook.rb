@@ -13,7 +13,33 @@ class GithubWebhook < ActiveRecord::Base
     const_set(event.upcase, event)
   end
 
-  def self.parse_and_build_from_json(json)
-    gw = new(payload: json)
+  def self.parse_and_build_from_json(github_event, payload)
+    new(github_event: github_event, payload: payload).tap do |gw|
+      gw.parse_and_set_fields
+    end
+  end
+
+  def parse_and_set_fields
+    self.username = parse_username
+    self.pr_workflow_event = parse_pr_workflow_event
+  end
+
+  private
+  def parse_username
+    return payload['sender']['login'] if payload.key?('sender')
+    return payload['pusher']['name'] if payload.key?('pusher')
+  end
+
+  def parse_pr_workflow_event
+    return PR_OPEN if payload['action'] == 'opened'
+    return PR_MERGE if payload['pull_request'] && payload['pull_request']['merged'] == true
+    return PR_DELETE if payload['deleted'] == true
+    return PR_COMMENT if payload['issue'] && payload['comment']
+    return PR_CODE_REVIEW_COMMENT if payload['comment']
+  end
+
+  def merged?
+    return false unless payload['action'] == 'closed'
+
   end
 end
