@@ -1,4 +1,14 @@
 class GithubWebhook < ActiveRecord::Base
+  USERNAMES = %w(
+  montague
+  jmpage
+  jhilker
+  cmcn
+  cddr
+  gl0ng
+  dougo
+  sosubramanian
+  )
   GITHUB_EVENTS = %w(
                 push pull_request_review_comment
                 issue_comment commit_comment
