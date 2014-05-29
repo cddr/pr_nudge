@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'pages#status'
   get '/ping', to: 'github_webhooks#ping'
   post "/payload", to: 'github_webhooks#payload'
   # The priority is based upon order of creation: first created -> highest priority.

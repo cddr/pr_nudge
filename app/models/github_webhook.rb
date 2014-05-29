@@ -1,14 +1,6 @@
 class GithubWebhook < ActiveRecord::Base
-  USERNAMES = %w(
-  montague
-  jmpage
-  jhilker
-  cmcn
-  cddr
-  gl0ng
-  dougo
-  sosubramanian
-  )
+  USERNAMES = %w(montague jmpage jhilker cmcn cddr gl0ng dougo sosubramanian)
+
   GITHUB_EVENTS = %w(
                 push pull_request_review_comment
                 issue_comment commit_comment
@@ -23,6 +15,8 @@ class GithubWebhook < ActiveRecord::Base
     const_set(event.upcase, event)
   end
 
+  validates :username, :pr_workflow_event, :github_event, presence: true
+
   def self.parse_and_build_from_json(github_event, payload)
     new(github_event: github_event, payload: payload).tap do |gw|
       gw.parse_and_set_fields
@@ -32,6 +26,18 @@ class GithubWebhook < ActiveRecord::Base
   def parse_and_set_fields
     self.username = parse_username
     self.pr_workflow_event = parse_pr_workflow_event
+  end
+
+  def self.status_for(user=:all)
+    # TODO build status report
+    # name
+    # last pr merged(w/colored background)
+    # last code review comment made
+    if user == :all
+      nil
+    else
+      nil
+    end
   end
 
   private
@@ -46,10 +52,5 @@ class GithubWebhook < ActiveRecord::Base
     return PR_DELETE if payload['deleted'] == true
     return PR_COMMENT if payload['issue'] && payload['comment']
     return PR_CODE_REVIEW_COMMENT if payload['comment']
-  end
-
-  def merged?
-    return false unless payload['action'] == 'closed'
-
   end
 end
