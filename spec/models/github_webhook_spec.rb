@@ -35,4 +35,20 @@ describe GithubWebhook, :type => :model do
       end
     end
   end
+
+  describe '.report' do
+    it 'returns an accurate report on pr activity' do
+      pending false
+      username = GithubWebhook::USERNAMES.first
+      GithubWebhook::PR_WORKFLOW_EVENTS.each do |trait|
+        FactoryGirl.create(:github_webhook, trait.to_sym, username: username)
+      end
+
+      report = GithubWebhook.report
+      #expect(report[username][:last_pr_comment]).to eq 1
+      #expect(report[username][:last_merge]).to eq 1
+      expect(report[username][:total_pr_comments]).to eq 1
+      expect(report[username][:total_prs_merged]).to eq 1
+    end
+  end
 end

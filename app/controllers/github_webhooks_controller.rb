@@ -10,7 +10,15 @@ class GithubWebhooksController < ApplicationController
     # TODO create an object w/type (event header)
     # use psql json to store the payload
     event = request.headers['X-GitHub-Event']
-    json = JSON.parse(params[:github_webhook].to_json)
+    payload = params.to_json
+    gw = GithubWebhook.parse_and_build_from_json(event, payload)
+    if gw.valid?
+      gw.save!
+      puts "+" * 50
+      puts "just saved a #{gw.pr_workflow_event}!"
+      puts "+" * 50
+    end
+    json = JSON.parse(payload)
     puts "=" * 50
     puts json
     # to differentiate:

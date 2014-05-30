@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def status
-    @data = GithubWebhook.all
+    @report = GithubWebhook.report
   end
 end
