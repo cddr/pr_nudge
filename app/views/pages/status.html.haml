@@ -9,7 +9,7 @@
   - @report.each do |username, stats|
     %tr
       %td= username
-      %td= stats[:last_pr_comment]
-      %td= stats[:last_pr_merged]
+      %td= formatted_time_ago stats[:last_pr_comment]
+      %td= formatted_time_ago stats[:last_pr_merged]
       %td= stats[:total_pr_comments]
       %td= stats[:total_prs_merged]

@@ -29,12 +29,12 @@ class GithubWebhook < ActiveRecord::Base
   end
 
   def self.report
-    # TODO build status report
+    # TODO refactor this shit
     # name
     # last pr merged(w/colored background)
     # last code review comment made
     {}.tap do |report|
-      USERNAMES.each {|username| report[username] = Hash.new("No data")}
+      USERNAMES.each {|username| report[username] = {}}
       GithubWebhook.where(pr_workflow_event: [:pr_comment, :pr_code_review_comment]).group(:username).maximum(:created_at).each do |username, time|
         report[username].merge!(last_pr_comment: time) if USERNAMES.include?(username)
       end
@@ -46,6 +46,11 @@ class GithubWebhook < ActiveRecord::Base
       end
       GithubWebhook.where(pr_workflow_event: :pr_merge).group(:username).count.each do |username, total|
         report[username].merge!(total_prs_merged: total) if USERNAMES.include?(username)
+      end
+      USERNAMES.each do |username|
+        %i(total_prs_merged total_pr_comments).each do |event|
+          report[username][event] ||= 0
+        end
       end
     end
   end
