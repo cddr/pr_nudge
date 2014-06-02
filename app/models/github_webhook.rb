@@ -41,11 +41,11 @@ class GithubWebhook < ActiveRecord::Base
       GithubWebhook.where(pr_workflow_event: :pr_merge).group(:username).maximum(:created_at).each do |username, time|
         report[username].merge!(last_merge: time) if USERNAMES.include?(username)
       end
-      GithubWebhook.where(pr_workflow_event: [:pr_comment, :pr_code_review_comment]).group(:username).count.each do |username, time|
-        report[username].merge!(total_pr_comments: count) if USERNAMES.include?(username)
+      GithubWebhook.where(pr_workflow_event: [:pr_comment, :pr_code_review_comment]).group(:username).count.each do |username, total|
+        report[username].merge!(total_pr_comments: total) if USERNAMES.include?(username)
       end
-      GithubWebhook.where(pr_workflow_event: :pr_merge).group(:username).count.each do |username, count|
-        report[username].merge!(total_prs_merged: count) if USERNAMES.include?(username)
+      GithubWebhook.where(pr_workflow_event: :pr_merge).group(:username).count.each do |username, total|
+        report[username].merge!(total_prs_merged: total) if USERNAMES.include?(username)
       end
     end
   end

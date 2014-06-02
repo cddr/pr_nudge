@@ -38,17 +38,22 @@ describe GithubWebhook, :type => :model do
 
   describe '.report' do
     it 'returns an accurate report on pr activity' do
-      pending false
-      username = GithubWebhook::USERNAMES.first
-      GithubWebhook::PR_WORKFLOW_EVENTS.each do |trait|
-        FactoryGirl.create(:github_webhook, trait.to_sym, username: username)
+      a_long_time_ago = Date.new(1983,12,12)
+      travel_to a_long_time_ago do
+        GithubWebhook::PR_WORKFLOW_EVENTS.each do |trait|
+          GithubWebhook::USERNAMES.each do |username|
+            FactoryGirl.create(:github_webhook, trait.to_sym, username: username)
+          end
+        end
       end
-
       report = GithubWebhook.report
-      #expect(report[username][:last_pr_comment]).to eq 1
-      #expect(report[username][:last_merge]).to eq 1
-      expect(report[username][:total_pr_comments]).to eq 1
-      expect(report[username][:total_prs_merged]).to eq 1
+
+      GithubWebhook::USERNAMES.each do |username|
+        expect(report[username][:last_pr_comment]).to eq a_long_time_ago
+        expect(report[username][:last_merge]).to eq a_long_time_ago
+        expect(report[username][:total_pr_comments]).to eq 2
+        expect(report[username][:total_prs_merged]).to eq 1
+      end
     end
   end
 end
