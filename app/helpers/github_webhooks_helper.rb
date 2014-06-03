@@ -1,6 +1,16 @@
 module GithubWebhooksHelper
-  def formatted_time_ago(time)
+
+  def formatted_time_in_colored_table_cell(time)
     return 'No Data' if time.nil?
-    time_ago_in_words(time)
+    hours_since_last_action = ((Time.now.utc - time.utc) / 1.hour).round * 5
+    if hours_since_last_action > 255
+      green = 0
+      red = 255
+    else
+      green = 255 - hours_since_last_action
+      red = hours_since_last_action
+    end
+    style = "background-color: rgba(#{red},#{green},0,0.8)"
+    content_tag :span, time_ago_in_words(time), style: style
   end
 end
