@@ -11,6 +11,6 @@ module GithubWebhooksHelper
       red = hours_since_last_action
     end
     style = "background-color: rgba(#{red},#{green},0,0.8)"
-    content_tag :span, time_ago_in_words(time), style: style
+    content_tag :span, "#{time_ago_in_words(time)} ago", style: style
   end
 end
