@@ -4,10 +4,14 @@ ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record
-gem 'pg'
-gem 'haml-rails'
+gem 'pg', '~> 0.17.1'
+gem 'haml-rails', '~> 0.5.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
+# Use bootstrap for style framework
+gem 'bootstrap-sass', '~> 3.1.1'
+# Use jquery as the JavaScript library
+gem 'jquery-rails', '~> 3.1.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -21,9 +25,9 @@ group :development do
 end
 
 group :test, :development do
-  gem 'byebug'
+  gem 'byebug', '~> 2.1.1'
   gem 'rspec-rails', '~> 3.0.0.beta'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 4.3.0'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -38,5 +42,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 # for heroku deployment
-gem 'rails_12factor', group: :production
-gem 'unicorn'
+gem 'rails_12factor', '~> 0.0.2', group: :production
+gem 'unicorn', '~> 4.6.2'

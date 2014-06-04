@@ -1,8 +1,19 @@
 !!!
 %html
   %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    = csrf_meta_tags
     %title PrNudger
     = stylesheet_link_tag 'application', media: 'all'
-    = csrf_meta_tags
+    -# HTML5 shims
+    /[if lt IE 9]
+      = javascript_tag "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+      = javascript_tag "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
   %body
-    = yield
+    .container-fluid.col-md-10.col-md-offset-1
+      .row
+        = yield
+
+    = javascript_include_tag 'application'
