@@ -1,5 +1,9 @@
 module GithubWebhooksHelper
 
+  def link_to_github_profile_for(username)
+    link_to username, "https://github.com/#{username}"
+  end
+
   def formatted_time_in_colored_table_cell(time)
     return content_tag :span, "No Data", style: "background-color: rgba(255,0,0,0.8)", class: 'label' if time.nil?
     hours_since_last_action = ((Time.now.utc - time.utc) / 1.hour).round * 5

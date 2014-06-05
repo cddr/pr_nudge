@@ -11,7 +11,7 @@
     %tbody
     - @report.each do |username, stats|
       %tr
-        %td= username
+        %td= link_to_github_profile_for username
         %td= formatted_time_in_colored_table_cell stats[:last_pr_comment]
         %td= formatted_time_in_colored_table_cell stats[:last_pr_merged]
         -#%td= stats[:total_pr_comments]
