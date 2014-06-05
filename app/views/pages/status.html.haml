@@ -6,13 +6,13 @@
         %th user
         %th last pr comment
         %th last pr merged
-        %th total pr comments
-        %th total prs merged
+        -#%th total pr comments
+        -#%th total prs merged
     %tbody
     - @report.each do |username, stats|
       %tr
         %td= username
         %td= formatted_time_in_colored_table_cell stats[:last_pr_comment]
         %td= formatted_time_in_colored_table_cell stats[:last_pr_merged]
-        %td= stats[:total_pr_comments]
-        %td= stats[:total_prs_merged]
+        -#%td= stats[:total_pr_comments]
+        -#%td= stats[:total_prs_merged]
