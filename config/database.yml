@@ -19,12 +19,12 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  username: pr_nudger
+  username: pr_nudge
   pool: 5
 
 development:
   <<: *default
-  database: pr_nudger_development
+  database: pr_nudge_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: pr_nudger_test
+  database: pr_nudge_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: pr_nudger_production
-  username: pr_nudger
-  password: <%= ENV['PR_NUDGER_DATABASE_PASSWORD'] %>
+  database: pr_nudge_production
+  username: pr_nudge
+  password: <%= ENV['PR_NUDGE_DATABASE_PASSWORD'] %>

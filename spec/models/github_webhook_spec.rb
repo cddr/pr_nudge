@@ -50,7 +50,7 @@ describe GithubWebhook, :type => :model do
 
       GithubWebhook::USERNAMES.each do |username|
         expect(report[username][:last_pr_comment]).to eq a_long_time_ago
-        expect(report[username][:last_merge]).to eq a_long_time_ago
+        expect(report[username][:last_pr_merged]).to eq a_long_time_ago
         expect(report[username][:total_pr_comments]).to eq 2
         expect(report[username][:total_prs_merged]).to eq 1
       end
